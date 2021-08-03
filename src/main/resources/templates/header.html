@@ -1,0 +1,31 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js}"></script>
+    <script type="text/javascript"
+            th:src="@{https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js}"></script>
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+</head>
+
+<body>
+<div th:fragment="header">
+    <a href="/">Home</a>
+    <a href="/viewProducts">View products</a>
+    <a href="/cart">Cart</a>
+    <input id="resultInput" type="text" size="40">
+    <div sec:authorize="!isAuthenticated()">
+        <a href="/login">login</a>
+    </div>
+    <div sec:authorize="hasRole('ADMIN')">
+        <a href="/addProduct">Add product</a>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <a href="/order/view">Orders</a>
+        <a href="/logout">logout</a>
+    </div>
+</div>
+</body>
+</html>

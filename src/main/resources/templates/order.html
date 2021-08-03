@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Order</h1>
+<div th:replace="header :: header"></div>
+
+
+<ul>
+    <div th:each="order : ${orders}">
+        Id "<td th:text="${order.id}"></td>"
+        <div th:each="item : ${order.orderItems}">
+            productId "<td th:text="${item.productId}"></td>"
+            quantity "<td th:text="${item.quantity}"></td>"
+        </div>
+
+    </div>
+</ul>
+</body>
+</html>

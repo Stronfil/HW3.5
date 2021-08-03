@@ -1,0 +1,27 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js}"></script>
+    <script type="text/javascript"
+            th:src="@{https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js}"></script>
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+</head>
+<body>
+<h1>View products</h1>
+<div th:replace="header :: header"></div>
+<ul>
+    <tr th:each="product: ${products}">
+        Title "<td th:text="${product.title}"></td>"
+        Cost <td th:text="${product.cost}"></td>
+
+        <form action="#" th:action="@{/addToCart}" method="post">
+            <input type="hidden" th:value="${product.id}" name="id"/>
+            <input type="hidden" th:value="${product.title}" name="title"/>
+            <input type="hidden" th:value="${product.cost}" name="cost"/>
+            <p><input type="submit" value="Add to cart" onclick="updateCart()"></p>
+        </form>
+
+        <br>
+    </tr>
+</ul>
+</body>
+</html>

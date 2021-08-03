@@ -1,0 +1,40 @@
+version: '3.2'
+
+volumes:
+  store-postgres:
+    driver: local
+
+networks:
+  postgres-network:
+    driver: bridge
+  rabbitmq_go_net:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:9.6
+    container_name: store-postgres
+    volumes:
+      - type: volume
+        source: store-postgres
+        target: /var/lib/postgresql/dataConfig
+    networks:
+      - postgres-network
+    environment:
+      POSTGRES_DB: store
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespass
+    ports:
+      - "5435:5432"
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - rabbitmq_go_net

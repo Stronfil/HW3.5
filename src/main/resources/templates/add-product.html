@@ -1,0 +1,16 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title></title>
+</head>
+<body>
+<h1>Add products</h1>
+<div th:replace="header :: header"></div>
+
+<form action="#" th:action="@{/processForm}" th:object="${product}" method="post">
+    <p>Title: <input type="text" th:field="*{title}"/></p>
+    <p>Cost: <input type="text" th:field="*{cost}"/></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+
+</body>
+</html>
